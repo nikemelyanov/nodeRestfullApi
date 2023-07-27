@@ -1,6 +1,6 @@
 import express, { json } from 'express';
 import indexRouter from './routes/index.js';
-import authRouter from './routes/authRoutes.js';
+import authRouter from './routes/userRoutes/auth/index.js';
 
 const app = express();
 const port = process.env.port || 3000;
