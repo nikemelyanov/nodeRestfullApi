@@ -8,68 +8,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import pool from '../database.js';
-export function createUserTable() {
+export function addPost(postTitle, postBody) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const res = yield pool.query('CREATE TABLE users (id serial PRIMARY KEY, email VARCHAR(50), password VARCHAR(50))');
-            console.log(res);
-        }
-        catch (err) {
-            console.error(err);
-        }
-        finally {
-        }
-    });
-}
-export function dropUserTable() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const res = yield pool.query('DROP TABLE IF EXISTS users');
+            const res = yield pool.query('INSERT INTO posts(title, body) VALUES ($1, $2)', [postTitle, postBody]);
         }
         catch (err) {
             console.error(err);
         }
     });
 }
-export function addUser(userEmail, userPassword) {
+export function deletePost(postId) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const res = yield pool.query('INSERT INTO users (email, password) VALUES ($1, $2)', [userEmail, userPassword]);
-        }
-        catch (err) {
-            console.error(err);
-        }
-        finally {
-        }
-    });
-}
-export function deleteUser(userId) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const res = pool.query('DELETE FROM users WHERE id = $1', [userId]);
+            const res = pool.query('DELETE FROM posts WHERE id = $1', [postId]);
         }
         catch (err) {
             console.error(err);
         }
     });
 }
-export function getUsers() {
+export function getPosts() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const res = yield pool.query('SELECT * FROM users');
+            const res = yield pool.query('SELECT * FROM public.posts');
+            return res.rows;
         }
         catch (err) {
             console.error(err);
         }
-        finally {
-        }
     });
 }
-export function getUser(userEmail) {
+export function getPost(postTitle) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const res = yield pool.query('SELECT * FROM users WHERE email = $1', [
-                userEmail,
+            const res = yield pool.query('SELECT * FROM posts WHERE title = $1', [
+                postTitle,
             ]);
             const user = res.rows[0];
             return user;

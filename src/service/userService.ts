@@ -35,7 +35,6 @@ export async function deleteUser(userId: number) {
     const res = pool.query('DELETE FROM users WHERE id = $1', [userId]);
   } catch (err) {
     console.error(err);
-  } finally {
   }
 }
 export async function getUsers() {
@@ -55,6 +54,5 @@ export async function getUser(userEmail: number) {
     return user;
   } catch (err) {
     console.error(err);
-  } finally {
   }
 }

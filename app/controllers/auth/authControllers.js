@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { getUser, addUser } from '../service/userService.js';
+import { getUser, addUser } from '../../service/userService.js';
 import jwt from 'jsonwebtoken';
 const secret = 'my sercret jwt';
 export function registerUser(req, res) {

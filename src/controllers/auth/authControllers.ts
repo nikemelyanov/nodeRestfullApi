@@ -1,4 +1,7 @@
-import { getUser, addUser } from '../service/userService.js';
+import { getUser, addUser } from '../../service/userService.js';
+import jwt from 'jsonwebtoken';
+
+const secret = 'my sercret jwt';
 
 export async function registerUser(req: any, res: any) {
   const user = {
@@ -27,8 +30,8 @@ export async function loginUser(req: any, res: any) {
   if (!searchUser) {
     res.json({ message: 'неправильный логин или пароль' }).status(200);
   } else {
-    res.json({ message: 'авторизация прошла успешно' }).status(200);
     console.log(searchUser);
-    return searchUser;
+    const tokenUser = jwt.sign(searchUser, secret);
+    return res.json({ token: tokenUser }).status(200);
   }
 }
