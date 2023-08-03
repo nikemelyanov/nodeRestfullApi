@@ -1,4 +1,4 @@
-import { getUser, addUser } from '../../service/userService.js';
+import { getUser, createUser } from '../../service/userService.js';
 import jwt from 'jsonwebtoken';
 
 const secret = 'my sercret jwt';
@@ -16,7 +16,7 @@ export async function registerUser(req: any, res: any) {
       .status(400);
   }
 
-  const registerUser = await addUser(user.email, user.password);
+  const registerUser = await createUser(user.email, user.password);
   return res.json({ message: 'регистрация прошла успешно' }).status(200);
 }
 

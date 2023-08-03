@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { getUser, addUser } from '../../service/userService.js';
+import { getUser, createUser } from '../../service/userService.js';
 import jwt from 'jsonwebtoken';
 const secret = 'my sercret jwt';
 export function registerUser(req, res) {
@@ -22,7 +22,7 @@ export function registerUser(req, res) {
                 .json({ message: 'пользователь уже зарегистрирован' })
                 .status(400);
         }
-        const registerUser = yield addUser(user.email, user.password);
+        const registerUser = yield createUser(user.email, user.password);
         return res.json({ message: 'регистрация прошла успешно' }).status(200);
     });
 }

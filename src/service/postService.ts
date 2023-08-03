@@ -1,11 +1,11 @@
 import pool from '../database.js';
 
-export async function addPost(
+export async function createPost(
   postTitle: string,
   postBody: string,
 ) {
   try {
-    const res = await pool.query(
+    const result = await pool.query(
       'INSERT INTO posts(title, body) VALUES ($1, $2)',
       [postTitle, postBody]
     );
@@ -15,26 +15,26 @@ export async function addPost(
 }
 export async function deletePost(postId: number) {
   try {
-    const res = pool.query('DELETE FROM posts WHERE id = $1', [postId]);
+    const result = pool.query('DELETE FROM posts WHERE id = $1', [postId]);
   } catch (err) {
     console.error(err);
   }
 }
-export async function getPosts() {
+export async function getAllPosts() {
   try {
-    const res = await pool.query('SELECT * FROM posts');
-    return res
+    const result = await pool.query('SELECT * FROM posts');
+    return result.rows
   } catch (err) {
     console.error(err);
   }
 }
-export async function getPost(postTitle: number) {
+export async function getOnePost(postTitle: string) {
   try {
-    const res = await pool.query('SELECT * FROM posts WHERE title = $1', [
+    const result = await pool.query('SELECT * FROM posts WHERE title = $1', [
       postTitle,
     ]);
-    const user = res.rows[0];
-    return user;
+    const post = result.rows[0];
+    return post;
   } catch (err) {
     console.error(err);
   }

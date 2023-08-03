@@ -31,7 +31,7 @@ export function dropUserTable() {
         }
     });
 }
-export function addUser(userEmail, userPassword) {
+export function createUser(userEmail, userPassword) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const res = yield pool.query('INSERT INTO users (email, password) VALUES ($1, $2)', [userEmail, userPassword]);
@@ -53,7 +53,7 @@ export function deleteUser(userId) {
         }
     });
 }
-export function getUsers() {
+export function getAllUsers() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const res = yield pool.query('SELECT * FROM users');

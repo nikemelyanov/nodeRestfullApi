@@ -8,10 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import pool from '../database.js';
-export function addPost(postTitle, postBody) {
+export function createPost(postTitle, postBody) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const res = yield pool.query('INSERT INTO posts(title, body) VALUES ($1, $2)', [postTitle, postBody]);
+            const result = yield pool.query('INSERT INTO posts(title, body) VALUES ($1, $2)', [postTitle, postBody]);
         }
         catch (err) {
             console.error(err);
@@ -21,32 +21,32 @@ export function addPost(postTitle, postBody) {
 export function deletePost(postId) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const res = pool.query('DELETE FROM posts WHERE id = $1', [postId]);
+            const result = pool.query('DELETE FROM posts WHERE id = $1', [postId]);
         }
         catch (err) {
             console.error(err);
         }
     });
 }
-export function getPosts() {
+export function getAllPosts() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const res = yield pool.query('SELECT * FROM public.posts');
-            return res.rows;
+            const result = yield pool.query('SELECT * FROM posts');
+            return result.rows;
         }
         catch (err) {
             console.error(err);
         }
     });
 }
-export function getPost(postTitle) {
+export function getOnePost(postTitle) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const res = yield pool.query('SELECT * FROM posts WHERE title = $1', [
+            const result = yield pool.query('SELECT * FROM posts WHERE title = $1', [
                 postTitle,
             ]);
-            const user = res.rows[0];
-            return user;
+            const post = result.rows[0];
+            return post;
         }
         catch (err) {
             console.error(err);

@@ -19,7 +19,7 @@ export async function dropUserTable() {
   }
 }
 
-export async function addUser(userEmail: string, userPassword: string) {
+export async function createUser(userEmail: string, userPassword: string) {
   try {
     const res = await pool.query(
       'INSERT INTO users (email, password) VALUES ($1, $2)',
@@ -37,7 +37,7 @@ export async function deleteUser(userId: number) {
     console.error(err);
   }
 }
-export async function getUsers() {
+export async function getAllUsers() {
   try {
     const res = await pool.query('SELECT * FROM users');
   } catch (err) {
