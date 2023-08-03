@@ -23,7 +23,7 @@ export async function deletePost(postId: number) {
 export async function getPosts() {
   try {
     const res = await pool.query('SELECT * FROM posts');
-    return res.rows
+    return res
   } catch (err) {
     console.error(err);
   }
