@@ -31,10 +31,10 @@ export function dropUserTable() {
         }
     });
 }
-export function createUser(userEmail, userPassword) {
+export function createUser(user) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const res = yield pool.query('INSERT INTO users (email, password) VALUES ($1, $2)', [userEmail, userPassword]);
+            const res = yield pool.query('INSERT INTO users (email, password, avatar, firstname, lastname) VALUES ($1, $2, $3, $4, $5)', [user.email, user.password, user.avatar, user.firstname, user.lastname]);
         }
         catch (err) {
             console.error(err);
