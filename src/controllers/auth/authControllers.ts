@@ -5,8 +5,11 @@ const secret = 'my sercret jwt';
 
 export async function registerUser(req: any, res: any) {
   const user = {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     email: req.body.email,
     password: req.body.password,
+    avatar: req.body.avatar,
   };
 
   const searchUserForDB = await getUser(user.email);
@@ -16,7 +19,7 @@ export async function registerUser(req: any, res: any) {
       .status(400);
   }
 
-  const registerUser = await createUser(user.email, user.password);
+  const registerUser = await createUser(user);
   return res.json({ message: 'регистрация прошла успешно' }).status(200);
 }
 

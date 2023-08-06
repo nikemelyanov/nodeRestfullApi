@@ -13,8 +13,11 @@ const secret = 'my sercret jwt';
 export function registerUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
             email: req.body.email,
             password: req.body.password,
+            avatar: req.body.avatar,
         };
         const searchUserForDB = yield getUser(user.email);
         if (searchUserForDB) {
@@ -22,7 +25,7 @@ export function registerUser(req, res) {
                 .json({ message: 'пользователь уже зарегистрирован' })
                 .status(400);
         }
-        const registerUser = yield createUser(user.email, user.password);
+        const registerUser = yield createUser(user);
         return res.json({ message: 'регистрация прошла успешно' }).status(200);
     });
 }
