@@ -28,13 +28,21 @@ export async function loginUser(req: any, res: any) {
     email: req.body.email,
     password: req.body.password,
   };
+
   const searchUser = await getUser(user.email);
+
+  const payload = {
+    email: searchUser.email,
+    firstname: searchUser.firstname,
+    lastname: searchUser.lastname,
+    avatar: searchUser.avatar
+  }
 
   if (!searchUser) {
     res.json({ message: 'неправильный логин или пароль' }).status(200);
   } else {
-    console.log(searchUser);
-    const tokenUser = jwt.sign(searchUser, secret);
-    return res.json({ token: tokenUser }).status(200);
+    console.log(payload); 
+    const token = jwt.sign(payload, secret);
+    return res.json({ token: token }).status(200);
   }
 }
