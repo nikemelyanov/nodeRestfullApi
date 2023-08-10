@@ -8,10 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import pool from '../database.js';
-export function createPost(postTitle, postBody) {
+export function createPost(postTitle, postBody, authorId, author, createdDate) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const result = yield pool.query('INSERT INTO posts(title, body) VALUES ($1, $2)', [postTitle, postBody]);
+            const result = yield pool.query('INSERT INTO posts(title, body, user_id, author, date) VALUES ($1, $2, $3, $4, $5)', [postTitle, postBody, authorId, author, createdDate]);
         }
         catch (err) {
             console.error(err);

@@ -3,11 +3,14 @@ import pool from '../database.js';
 export async function createPost(
   postTitle: string,
   postBody: string,
+  authorId: number,
+  author: string,
+  createdDate: string
 ) {
   try {
     const result = await pool.query(
-      'INSERT INTO posts(title, body) VALUES ($1, $2)',
-      [postTitle, postBody]
+      'INSERT INTO posts(title, body, user_id, author, date) VALUES ($1, $2, $3, $4, $5)',
+      [postTitle, postBody, authorId, author, createdDate]
     );
   } catch (err) {
     console.error(err);

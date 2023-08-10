@@ -7,15 +7,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { createPost, getOnePost, getAllPosts } from '../../service/postService.js';
+import jwt from 'jsonwebtoken';
+import { createPost, getOnePost, getAllPosts, } from '../../service/postService.js';
 export function addPost(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        const date = new Date();
+        const formatedDate = date.toLocaleDateString();
         const post = {
             title: req.body.title,
             body: req.body.body,
+            date: formatedDate
         };
-        const result = yield createPost(post.title, post.body);
-        return res.json({ message: 'пост создан успешно' }).status(200);
+        const tokenWithPrefix = req.headers.authorization;
+        const token = tokenWithPrefix.split(' ')[1];
+        if (!token) {
+            return res.status(401).json({ message: 'токен отсутствует' });
+        }
+        try {
+            const decodedUser = jwt.verify(token, 'my sercret jwt');
+            if (typeof decodedUser === 'object' && decodedUser !== null) {
+                const create = yield createPost(post.title, post.body, decodedUser.id, `${decodedUser.firstname + ' ' + decodedUser.lastname}`, post.date);
+            }
+            return res.status(200).json({ message: 'пост создан успешно' });
+        }
+        catch (err) {
+            return res.status(401).json({ message: 'неверный токен' });
+        }
     });
 }
 export function getPosts(req, res) {
