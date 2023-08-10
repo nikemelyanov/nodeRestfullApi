@@ -31,18 +31,19 @@ export async function loginUser(req: any, res: any) {
 
   const searchUser = await getUser(user.email);
 
+  if (!searchUser) {
+    return res.status(401).json({ message: 'неправильный логин или пароль' }).status(200);
+  }
+  
   const payload = {
+    id: searchUser.id,
     email: searchUser.email,
     firstname: searchUser.firstname,
     lastname: searchUser.lastname,
-    avatar: searchUser.avatar
-  }
+    avatar: searchUser.avatar,
+  };
+  console.log(payload);
 
-  if (!searchUser) {
-    res.json({ message: 'неправильный логин или пароль' }).status(200);
-  } else {
-    console.log(payload); 
-    const token = jwt.sign(payload, secret);
-    return res.json({ token: token }).status(200);
-  }
+  const token = jwt.sign(payload, secret);
+  return res.status(200).json({ token: token });
 }
