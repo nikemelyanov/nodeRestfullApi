@@ -50,3 +50,4 @@ export async function getPost(req: any, res: any) {
   const result = await getOnePost(post.title);
   return res.json(result);
 }
+

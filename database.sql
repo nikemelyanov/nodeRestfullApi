@@ -4,7 +4,7 @@ create TABLE person(
   surname VARCHAR(255)
 )
 
-create TABLE person(
+create TABLE post(
   id SERIAL PRIMARY KEY,
   title VARCHAR(255),
   content VARCHAR(255),
