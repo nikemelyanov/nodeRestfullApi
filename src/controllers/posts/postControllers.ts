@@ -43,8 +43,7 @@ export async function getPosts(req: any, res: any) {
 
 export async function getPost(req: any, res: any) {
   const post = {
-    title: req.body.title,
-    body: req.body.body,
+    title: req.body.title
   };
 
   const result = await getOnePost(post.title);
