@@ -1,7 +1,7 @@
 import express, { json } from 'express';
 import indexRouter from './routes/index.js';
-import authRouter from './routes/userRoutes/auth/index.js';
-import postRouter from './routes/postsRoutes/index.js';
+import authRouter from './routes/users/auth/index.js';
+import postRouter from './routes/posts/index.js';
 import cors from 'cors';
 import dotenv from 'dotenv'
 
