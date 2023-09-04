@@ -8,74 +8,132 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import pool from '../database.js';
-export function createUserTable() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const res = yield pool.query('CREATE TABLE users (id serial PRIMARY KEY, email VARCHAR(50), password VARCHAR(50))');
-            console.log(res);
-        }
-        catch (err) {
-            console.error(err);
-        }
-        finally {
-        }
-    });
+class userServiceClass {
+    createUser(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const res = yield pool.query('INSERT INTO users (email, password, avatar, firstname, lastname) VALUES ($1, $2, $3, $4, $5)', [user.email, user.password, user.avatar, user.firstname, user.lastname]);
+            }
+            catch (err) {
+                console.error(err);
+            }
+            finally {
+            }
+        });
+    }
+    deleteUser(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const res = pool.query('DELETE FROM users WHERE id = $1', [userId]);
+            }
+            catch (err) {
+                console.error(err);
+            }
+        });
+    }
+    getAllUsers() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const res = yield pool.query('SELECT * FROM users');
+            }
+            catch (err) {
+                console.error(err);
+            }
+            finally {
+            }
+        });
+    }
+    getUser(userEmail) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const res = yield pool.query('SELECT * FROM users WHERE email = $1', [
+                    userEmail,
+                ]);
+                const user = res.rows[0];
+                return user;
+            }
+            catch (err) {
+                console.error(err);
+            }
+        });
+    }
+    createUserTable() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const res = yield pool.query('CREATE TABLE users (id serial PRIMARY KEY, email VARCHAR(50), password VARCHAR(50))');
+                console.log(res);
+            }
+            catch (err) {
+                console.error(err);
+            }
+            finally {
+            }
+        });
+    }
+    dropUserTable() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const res = yield pool.query('DROP TABLE IF EXISTS users');
+            }
+            catch (err) {
+                console.error(err);
+            }
+        });
+    }
 }
-export function dropUserTable() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const res = yield pool.query('DROP TABLE IF EXISTS users');
-        }
-        catch (err) {
-            console.error(err);
-        }
-    });
-}
-export function createUser(user) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const res = yield pool.query('INSERT INTO users (email, password, avatar, firstname, lastname) VALUES ($1, $2, $3, $4, $5)', [user.email, user.password, user.avatar, user.firstname, user.lastname]);
-        }
-        catch (err) {
-            console.error(err);
-        }
-        finally {
-        }
-    });
-}
-export function deleteUser(userId) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const res = pool.query('DELETE FROM users WHERE id = $1', [userId]);
-        }
-        catch (err) {
-            console.error(err);
-        }
-    });
-}
-export function getAllUsers() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const res = yield pool.query('SELECT * FROM users');
-        }
-        catch (err) {
-            console.error(err);
-        }
-        finally {
-        }
-    });
-}
-export function getUser(userEmail) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const res = yield pool.query('SELECT * FROM users WHERE email = $1', [
-                userEmail,
-            ]);
-            const user = res.rows[0];
-            return user;
-        }
-        catch (err) {
-            console.error(err);
-        }
-    });
-}
+export const userService = new userServiceClass();
+// export async function createUserTable() {
+//   try {
+//     const res = await pool.query(
+//       'CREATE TABLE users (id serial PRIMARY KEY, email VARCHAR(50), password VARCHAR(50))'
+//     );
+//     console.log(res);
+//   } catch (err) {
+//     console.error(err);
+//   } finally {
+//   }
+// }
+// export async function dropUserTable() {
+//   try {
+//     const res = await pool.query('DROP TABLE IF EXISTS users');
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
+// export async function createUser(user: any) {
+//   try {
+//     const res = await pool.query(
+//       'INSERT INTO users (email, password, avatar, firstname, lastname) VALUES ($1, $2, $3, $4, $5)',
+//       [user.email, user.password, user.avatar, user.firstname, user.lastname]
+//     );
+//   } catch (err) {
+//     console.error(err);
+//   } finally {
+//   }
+// }
+// export async function deleteUser(userId: number) {
+//   try {
+//     const res = pool.query('DELETE FROM users WHERE id = $1', [userId]);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
+// export async function getAllUsers() {
+//   try {
+//     const res = await pool.query('SELECT * FROM users');
+//   } catch (err) {
+//     console.error(err);
+//   } finally {
+//   }
+// }
+// export async function getUser(userEmail: number) {
+//   try {
+//     const res = await pool.query('SELECT * FROM users WHERE email = $1', [
+//       userEmail,
+//     ]);
+//     const user = res.rows[0];
+//     return user;
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }

@@ -1,4 +1,4 @@
-import { getUser, createUser } from '../../service/userService.js';
+import { userService } from '../../service/userService.js';
 import jwt from 'jsonwebtoken';
 
 const secret = 'my sercret jwt';
@@ -12,14 +12,14 @@ export async function registerUser(req: any, res: any) {
     avatar: req.body.avatar,
   };
 
-  const searchUserForDB = await getUser(user.email);
+  const searchUserForDB = await userService.getUser(user.email);
   if (searchUserForDB) {
     return res
       .json({ message: 'пользователь уже зарегистрирован' })
       .status(400);
   }
 
-  const registerUser = await createUser(user);
+  const registerUser = await userService.createUser(user);
   return res.json({ message: 'регистрация прошла успешно' }).status(200);
 }
 
@@ -29,7 +29,7 @@ export async function loginUser(req: any, res: any) {
     password: req.body.password,
   };
 
-  const searchUser = await getUser(user.email);
+  const searchUser = await userService.getUser(user.email);
 
   if (!searchUser) {
     return res.status(401).json({ message: 'неправильный логин или пароль' }).status(200);
