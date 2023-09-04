@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { getUser, createUser } from '../../service/userService.js';
+import { userService } from '../../service/userService.js';
 import jwt from 'jsonwebtoken';
 const secret = 'my sercret jwt';
 export function registerUser(req, res) {
@@ -19,13 +19,13 @@ export function registerUser(req, res) {
             password: req.body.password,
             avatar: req.body.avatar,
         };
-        const searchUserForDB = yield getUser(user.email);
+        const searchUserForDB = yield userService.getUser(user.email);
         if (searchUserForDB) {
             return res
                 .json({ message: 'пользователь уже зарегистрирован' })
                 .status(400);
         }
-        const registerUser = yield createUser(user);
+        const registerUser = yield userService.createUser(user);
         return res.json({ message: 'регистрация прошла успешно' }).status(200);
     });
 }
@@ -35,7 +35,7 @@ export function loginUser(req, res) {
             email: req.body.email,
             password: req.body.password,
         };
-        const searchUser = yield getUser(user.email);
+        const searchUser = yield userService.getUser(user.email);
         if (!searchUser) {
             return res.status(401).json({ message: 'неправильный логин или пароль' }).status(200);
         }

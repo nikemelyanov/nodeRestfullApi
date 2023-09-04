@@ -44,8 +44,7 @@ export function getPosts(req, res) {
 export function getPost(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const post = {
-            title: req.body.title,
-            body: req.body.body,
+            title: req.body.title
         };
         const result = yield getOnePost(post.title);
         return res.json(result);
