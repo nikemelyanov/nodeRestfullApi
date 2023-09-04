@@ -1,10 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import {
-  createPost,
-  getOnePost,
-  getAllPosts,
-} from '../../service/postService.js';
+import { postService } from '../../service/postService';
 
 export async function addPost(req: any, res: any) {
   const date = new Date()
@@ -27,7 +23,7 @@ export async function addPost(req: any, res: any) {
     const decodedUser = jwt.verify(token, 'my sercret jwt');
 
     if (typeof decodedUser === 'object' && decodedUser !== null) {
-      const create = await createPost(post.title, post.body, decodedUser.id, `${decodedUser.firstname + ' ' + decodedUser.lastname}`, post.date);
+      const create = await postService.createPost(post.title, post.body, decodedUser.id, `${decodedUser.firstname + ' ' + decodedUser.lastname}`, post.date);
     }
 
     return res.status(200).json({ message: 'пост создан успешно' });
@@ -37,7 +33,7 @@ export async function addPost(req: any, res: any) {
 }
 
 export async function getPosts(req: any, res: any) {
-  const result = await getAllPosts();
+  const result = await postService.getAllPosts();
   return res.json(result);
 }
 
@@ -46,7 +42,7 @@ export async function getPost(req: any, res: any) {
     title: req.body.title
   };
 
-  const result = await getOnePost(post.title);
+  const result = await postService.getOnePost(post.title);
   return res.json(result);
 }
 

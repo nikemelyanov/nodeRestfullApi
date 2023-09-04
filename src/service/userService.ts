@@ -59,6 +59,4 @@ class userServiceClass {
   }
 }
 
-export const userService = new userServiceClass()
-
-
+export const userService = new userServiceClass();
