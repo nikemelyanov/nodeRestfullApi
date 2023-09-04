@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { postService } from '../../service/postService';
+import { postService } from '../../service/postService.js';
 
 class postControllerClass {
   async addPost(req: any, res: any) {
