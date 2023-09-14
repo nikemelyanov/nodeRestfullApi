@@ -29,7 +29,8 @@ class postControllerClass {
           post.body,
           decodedUser.id,
           `${decodedUser.firstname + ' ' + decodedUser.lastname}`,
-          post.date
+          post.date,
+          decodedUser.avatar
         );
       }
 

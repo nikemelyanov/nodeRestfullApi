@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "es2022",
     "outDir": "app",
     "strict": true,
     "esModuleInterop": true,

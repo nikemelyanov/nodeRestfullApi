@@ -16,8 +16,11 @@ app.use(
     origin: 'http://localhost:3000',
   })
 );
+
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/posts', postRouter);
+
+app.use('/images', express.static('./app/images'))
 
 app.listen(port, () => console.log(`app started in ${port} port`));
