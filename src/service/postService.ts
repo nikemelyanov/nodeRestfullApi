@@ -6,12 +6,13 @@ class postServiceClass {
     postBody: string,
     authorId: number,
     author: string,
-    createdDate: string
+    createdDate: string,
+    avatar: string
   ) {
     try {
       const result = await pool.query(
-        'INSERT INTO posts(title, body, user_id, author, date) VALUES ($1, $2, $3, $4, $5)',
-        [postTitle, postBody, authorId, author, createdDate]
+        'INSERT INTO posts(title, body, user_id, author, date, avatar) VALUES ($1, $2, $3, $4, $5, $6)',
+        [postTitle, postBody, authorId, author, createdDate, avatar]
       );
     } catch (err) {
       console.error(err);
