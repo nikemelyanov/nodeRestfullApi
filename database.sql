@@ -11,3 +11,8 @@ create TABLE post(
   user_id INTEGER,
   FOREIGN KEY (user_id) REFERENCES person (id)
 )
+
+SELECT posts.id, posts.title, posts.body, users.avatar, CONCAT(users.firstname, ' ', users.lastname) fullname 
+FROM public.posts
+LEFT JOIN users ON users.id = posts.user_id 
+ORDER BY posts.id ASC;

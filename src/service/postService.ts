@@ -27,7 +27,7 @@ class postServiceClass {
   }
   async getAllPosts() {
     try {
-      const result = await pool.query('SELECT * FROM posts');
+      const result = await pool.query('SELECT * FROM posts ORDER BY id DESC');
       return result.rows;
     } catch (err) {
       console.error(err);
