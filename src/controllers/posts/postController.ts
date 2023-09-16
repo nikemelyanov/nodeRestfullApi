@@ -42,6 +42,7 @@ class postControllerClass {
 
   async getPosts(req: any, res: any) {
     const result = await postService.getAllPosts();
+    console.log(result);
     return res.json(result);
   }
 
