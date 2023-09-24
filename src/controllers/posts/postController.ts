@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { postService } from '../../service/postService.js';
+import { postService } from '../../service/postsService.js';
 
 class postControllerClass {
   async addPost(req: any, res: any) {
@@ -41,8 +41,7 @@ class postControllerClass {
   }
 
   async getPosts(req: any, res: any) {
-    const result = await postService.getAllPosts();
-    console.log(result);
+    const result = await postService.getAllPosts();;
     return res.json(result);
   }
 
