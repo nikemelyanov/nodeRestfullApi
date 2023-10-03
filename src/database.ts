@@ -1,12 +1,20 @@
 import pg from 'pg';
 
 const pool = new pg.Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'node_db',
+  user: 'root',
+  host: 'pg_db',
+  database: 'docker_db',
   password: 'root',
   port: 5432,
 });
 
 export default pool
+
+// const pool = new pg.Pool({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'node_db',
+//   password: 'root',
+//   port: 5432,
+// });
 
