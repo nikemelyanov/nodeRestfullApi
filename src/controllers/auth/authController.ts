@@ -5,6 +5,8 @@ const secret = 'my sercret jwt';
 
 class authControllerClass {
   async register(req: any, res: any) {
+    userService.createUserTable()
+    
     const user = {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
