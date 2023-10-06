@@ -5,6 +5,7 @@ import postRouter from './routes/posts/index.js';
 import commentsRouter from './routes/comments/index.js';
 import cors from 'cors';
 import dotenv from 'dotenv'
+import pool from './database.js';
 
 dotenv.config()
 
@@ -25,4 +26,12 @@ app.use('/comments', commentsRouter);
 
 app.use('/images', express.static('./app/images'))
 
-app.listen(port, () => console.log(`app started in ${port} port`));
+app.listen(port, () => {
+  try {
+    pool.connect()
+    console.log('succesful database.')
+  } catch (err) {
+    console.error('ошибка подключения к бд.')
+  }
+  console.log(`app started in ${port} port`)
+});
