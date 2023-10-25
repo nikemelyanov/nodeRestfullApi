@@ -1,7 +1,7 @@
 import pool from '../database.js';
 
-class postServiceClass {
-  async createPost(
+export class PostService {
+  static async createPost(
     postTitle: string,
     postBody: string,
     authorId: number,
@@ -18,14 +18,14 @@ class postServiceClass {
       console.error(err);
     }
   }
-  async deletePost(postId: number) {
+  static async deletePost(postId: number) {
     try {
       const result = pool.query('DELETE FROM posts WHERE id = $1', [postId]);
     } catch (err) {
       console.error(err);
     }
   }
-  async getAllPosts() {
+  static async getAllPosts() {
     try {
       const result = await pool.query('SELECT * FROM posts ORDER BY id DESC');
       return result.rows;
@@ -33,7 +33,7 @@ class postServiceClass {
       console.error(err);
     }
   }
-  async getOnePost(postTitle: string) {
+  static async getOnePost(postTitle: string) {
     try {
       const result = await pool.query('SELECT * FROM posts WHERE title = $1', [
         postTitle,
@@ -45,5 +45,3 @@ class postServiceClass {
     }
   }
 }
-
-export const postService = new postServiceClass();

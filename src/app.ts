@@ -7,10 +7,10 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 import pool from './database.js';
 
-dotenv.config()
-
 const app = express();
 const port = process.env.port || 4000;
+
+dotenv.config()
 
 app.use(json());
 app.use(

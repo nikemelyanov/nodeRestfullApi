@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 
-import { postService } from '../../service/postsService.js';
+import { PostService } from '../../service/postsService.js';
 
-class postControllerClass {
-  async addPost(req: any, res: any) {
+export class PostController {
+  static async addPost(req: any, res: any) {
     const date = new Date();
     const formatedDate = date.toLocaleDateString();
 
@@ -24,7 +24,7 @@ class postControllerClass {
       const decodedUser = jwt.verify(token, 'my sercret jwt');
 
       if (typeof decodedUser === 'object' && decodedUser !== null) {
-        const create = await postService.createPost(
+        const create = await PostService.createPost(
           post.title,
           post.body,
           decodedUser.id,
@@ -40,19 +40,17 @@ class postControllerClass {
     }
   }
 
-  async getPosts(req: any, res: any) {
-    const result = await postService.getAllPosts();;
+  static async getPosts(req: any, res: any) {
+    const result = await PostService.getAllPosts();
     return res.json(result);
   }
 
-  async getPost(req: any, res: any) {
+  static async getPost(req: any, res: any) {
     const post = {
       title: req.body.title,
     };
 
-    const result = await postService.getOnePost(post.title);
+    const result = await PostService.getOnePost(post.title);
     return res.json(result);
   }
 }
-
-export const postController = new postControllerClass();

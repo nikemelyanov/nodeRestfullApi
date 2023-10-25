@@ -1,10 +1,10 @@
-import { userService } from '../../service/usersService.js';
+import { UserService } from '../../service/usersService.js';
 import jwt from 'jsonwebtoken';
 
 const secret = 'my sercret jwt';
 
-class authControllerClass {
-  async register(req: any, res: any) {
+export class AuthController{
+  static async register(req: any, res: any) {
     const user = {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
@@ -12,30 +12,33 @@ class authControllerClass {
       password: req.body.password,
       avatar: req.body.avatar,
     };
-  
-    const searchUserForDB = await userService.getUser(user.email);
+
+    const searchUserForDB = await UserService.getUser(user.email);
     if (searchUserForDB) {
       return res
         .json({ message: 'пользователь уже зарегистрирован' })
         .status(400);
     }
-  
-    const registerUser = await userService.createUser(user);
+
+    const registerUser = await UserService.createUser(user);
     return res.json({ message: 'регистрация прошла успешно' }).status(200);
   }
-  
-  async login(req: any, res: any) {
+
+  static async login(req: any, res: any) {
     const user = {
       email: req.body.email,
       password: req.body.password,
     };
-  
-    const searchUser = await userService.getUser(user.email);
-  
+
+    const searchUser = await UserService.getUser(user.email);
+
     if (!searchUser) {
-      return res.status(401).json({ message: 'неправильный логин или пароль' }).status(200);
+      return res
+        .status(401)
+        .json({ message: 'неправильный логин или пароль' })
+        .status(200);
     }
-    
+
     const payload = {
       id: searchUser.id,
       email: searchUser.email,
@@ -44,10 +47,8 @@ class authControllerClass {
       avatar: searchUser.avatar,
     };
     console.log(payload);
-  
+
     const token = jwt.sign(payload, secret);
     return res.status(200).json({ token: token });
   }
 }
-
-export const authController = new authControllerClass()

@@ -1,7 +1,7 @@
 import pool from '../database.js';
 
-class userServiceClass {
-  async createUser(user: any) {
+export class UserService {
+  static async createUser(user: any) {
     try {
       const res = await pool.query(
         'INSERT INTO users (email, password, avatar, firstname, lastname) VALUES ($1, $2, $3, $4, $5)',
@@ -12,14 +12,14 @@ class userServiceClass {
     } finally {
     }
   }
-  async deleteUser(userId: number) {
+  static async deleteUser(userId: number) {
     try {
       const res = pool.query('DELETE FROM users WHERE id = $1', [userId]);
     } catch (err) {
       console.error(err);
     }
   }
-  async getAllUsers() {
+  static async getAllUsers() {
     try {
       const res = await pool.query('SELECT * FROM users');
     } catch (err) {
@@ -27,7 +27,7 @@ class userServiceClass {
     } finally {
     }
   }
-  async getUser(userEmail: number) {
+  static async getUser(userEmail: number) {
     try {
       const res = await pool.query('SELECT * FROM users WHERE email = $1', [
         userEmail,
@@ -39,7 +39,7 @@ class userServiceClass {
     }
   }
 
-  async createUserTable() {
+  static async createUserTable() {
     try {
       const res = await pool.query(
         'CREATE TABLE users (id serial PRIMARY KEY, email VARCHAR(50), password VARCHAR(50))'
@@ -50,7 +50,7 @@ class userServiceClass {
     } finally {
     }
   }
-  async dropUserTable() {
+  static async dropUserTable() {
     try {
       const res = await pool.query('DROP TABLE IF EXISTS users');
     } catch (err) {
@@ -58,5 +58,3 @@ class userServiceClass {
     }
   }
 }
-
-export const userService = new userServiceClass();

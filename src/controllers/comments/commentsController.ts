@@ -1,8 +1,8 @@
 import { CommentsServise } from '../../service/commentsService.js';
 import jwt from 'jsonwebtoken';
 
-class CommentsControllerClass {
-  async getComments(req: any, res: any) {
+export class CommentsController {
+  static async getComments(req: any, res: any) {
     const postId = {
       id: req.body.postId,
     };
@@ -11,7 +11,7 @@ class CommentsControllerClass {
     return res.json(result);
   }
 
-  async createComment(req: any, res: any) {
+  static async createComment(req: any, res: any) {
     const date = new Date();
     const formatedDate = date.toLocaleDateString();
 
@@ -48,5 +48,3 @@ class CommentsControllerClass {
     }
   }
 }
-
-export const CommentsController = new CommentsControllerClass();

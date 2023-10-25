@@ -1,7 +1,7 @@
 import pool from '../database.js';
 
-class CommentsServiseClass {
-  async getComments(postId: number) {
+export class CommentsServise {
+  static async getComments(postId: number) {
     try {
       const result = await pool.query(
         'SELECT * FROM comments WHERE post_id = $1 ORDER BY id DESC',
@@ -13,7 +13,7 @@ class CommentsServiseClass {
     }
   }
 
-  async createComment(
+  static async createComment(
     commentBody: string,
     postId: number,
     authorId: number,
@@ -31,5 +31,3 @@ class CommentsServiseClass {
     }
   }
 }
-
-export const CommentsServise = new CommentsServiseClass();
