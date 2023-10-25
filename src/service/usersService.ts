@@ -9,9 +9,9 @@ export class UserService {
       );
     } catch (err) {
       console.error(err);
-    } finally {
     }
   }
+
   static async deleteUser(userId: number) {
     try {
       const res = pool.query('DELETE FROM users WHERE id = $1', [userId]);
@@ -19,14 +19,15 @@ export class UserService {
       console.error(err);
     }
   }
+
   static async getAllUsers() {
     try {
       const res = await pool.query('SELECT * FROM users');
     } catch (err) {
       console.error(err);
-    } finally {
     }
   }
+
   static async getUser(userEmail: number) {
     try {
       const res = await pool.query('SELECT * FROM users WHERE email = $1', [
@@ -47,9 +48,9 @@ export class UserService {
       console.log(res);
     } catch (err) {
       console.error(err);
-    } finally {
     }
   }
+
   static async dropUserTable() {
     try {
       const res = await pool.query('DROP TABLE IF EXISTS users');
