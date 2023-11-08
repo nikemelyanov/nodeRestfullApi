@@ -5,7 +5,7 @@ import postRouter from './routes/posts';
 import commentsRouter from './routes/comments';
 import cors from 'cors';
 import dotenv from 'dotenv'
-import pool from './database.js';
+import pool from './db';
 
 const app = express();
 const port = process.env.port || 4000;

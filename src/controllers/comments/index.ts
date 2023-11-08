@@ -1,4 +1,4 @@
-import { CommentsServise } from '../../service/comments/';
+import { CommentsServise } from '../../service/comments';
 import jwt from 'jsonwebtoken';
 
 export class CommentsController {
