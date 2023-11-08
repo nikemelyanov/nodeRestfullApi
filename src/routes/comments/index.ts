@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { CommentsController } from '../../controllers/comments/commentsController.js';
+import { CommentsController } from '../../controllers/comments';
 
 router.post('/getComments', CommentsController.getComments)
 router.post('/createComment', CommentsController.createComment)
