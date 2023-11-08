@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    "module": "commonjs",
     "target": "es2022",
     "outDir": "app",
+    "baseUrl": "./",
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "Node"

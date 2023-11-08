@@ -1,8 +1,8 @@
 import express, { json } from 'express';
-import indexRouter from './routes/index.js';
-import authRouter from './routes/users/auth/index.js';
-import postRouter from './routes/posts/index.js';
-import commentsRouter from './routes/comments/index.js';
+import indexRouter from './routes';
+import authRouter from './routes/users/auth';
+import postRouter from './routes/posts';
+import commentsRouter from './routes/comments';
 import cors from 'cors';
 import dotenv from 'dotenv'
 import pool from './database.js';

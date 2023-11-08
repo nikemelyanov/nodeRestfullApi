@@ -1,4 +1,4 @@
-import pool from '../database.js';
+import pool from '../../database.js';
 
 export class UserService {
   static async createUser(user: any) {
