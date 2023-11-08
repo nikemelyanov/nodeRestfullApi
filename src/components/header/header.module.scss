@@ -1,0 +1,47 @@
+.header {
+  margin-bottom: 90px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  cursor: pointer;
+  font-size: 15px;
+  span {
+    font-size: 45px;
+  }
+}
+
+.user {
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  .avatar {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+  .userInfo {
+    font-size: 15px;
+    margin-left: 10px;
+  }
+  .logout {
+    cursor: pointer;
+    height: 21px;
+    width: 21px;
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+}
+@media screen and (max-width: 768px) {
+}
+@media screen and (max-width: 576px) {
+  .user {
+    align-items: flex-end;
+  }
+}
