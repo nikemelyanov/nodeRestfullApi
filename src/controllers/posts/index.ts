@@ -5,12 +5,12 @@ import { PostService } from '../../service/post';
 export class PostController {
   static async addPost(req: any, res: any) {
     const date = new Date();
-    const formatedDate = date.toLocaleDateString();
+    const formated_date = date.toLocaleDateString();
 
     const post = {
       title: req.body.title,
       body: req.body.body,
-      date: formatedDate,
+      date: formated_date,
     };
 
     const tokenWithPrefix = req.headers.authorization;
@@ -21,16 +21,16 @@ export class PostController {
     }
 
     try {
-      const decodedUser = jwt.verify(token, 'my sercret jwt');
+      const decoded_user = jwt.verify(token, 'my sercret jwt');
 
-      if (typeof decodedUser === 'object' && decodedUser !== null) {
+      if (typeof decoded_user === 'object' && decoded_user !== null) {
         const create = await PostService.createPost(
           post.title,
           post.body,
-          decodedUser.id,
-          `${decodedUser.firstname + ' ' + decodedUser.lastname}`,
+          decoded_user.id,
+          `${decoded_user.firstname + ' ' + decoded_user.lastname}`,
           post.date,
-          decodedUser.avatar
+          decoded_user.avatar
         );
       }
 
