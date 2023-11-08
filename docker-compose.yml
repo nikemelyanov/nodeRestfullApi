@@ -8,6 +8,8 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: docker_db
+    volumes:
+      - ./data:/var/lib/postgresql/data
     ports:
       - "5433:5432"
 

@@ -6,11 +6,11 @@ const secret = 'my sercret jwt';
 export class AuthController{
   static async register(req: any, res: any) {
     const user = {
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
-      avatar: req.body.avatar,
+      avatar_path: req.body.avatar_path,
     };
 
     const searchUserForDB = await UserService.getUser(user.email);
@@ -27,7 +27,7 @@ export class AuthController{
   static async login(req: any, res: any) {
     const user = {
       email: req.body.email,
-      password: req.body.password,
+      password: req.body.password, // add this fix in postman
     };
 
     const searchUser = await UserService.getUser(user.email);
@@ -42,9 +42,9 @@ export class AuthController{
     const payload = {
       id: searchUser.id,
       email: searchUser.email,
-      firstname: searchUser.firstname,
-      lastname: searchUser.lastname,
-      avatar: searchUser.avatar,
+      first_name: searchUser.first_name,
+      last_name: searchUser.last_name,
+      avatar_path: searchUser.avatar_path,
     };
     console.log(payload);
 

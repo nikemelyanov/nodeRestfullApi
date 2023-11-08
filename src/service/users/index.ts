@@ -1,15 +1,21 @@
 import pool from '../../db';
+import bcrypt from 'bcrypt'
 
 export class UserService {
   static async createUser(user: any) {
-    try {
-      const res = await pool.query(
-        'INSERT INTO users (email, password, avatar, firstname, lastname) VALUES ($1, $2, $3, $4, $5)',
-        [user.email, user.password, user.avatar, user.firstname, user.lastname]
+    const pass = user.password
+    const saltRounds = 10
+    
+    const passHash = await bcrypt.hash(pass, saltRounds, function(err, hash) {
+      if (err) {
+        console.error(err)
+        return
+      }
+      pool.query(
+        'INSERT INTO users (email, password_hash, avatar_path, first_name, last_name) VALUES ($1, $2, $3, $4, $5)',
+        [user.email, hash, user.avatar_path, user.first_name, user.last_name]
       );
-    } catch (err) {
-      console.error(err);
-    }
+    })
   }
 
   static async deleteUser(userId: number) {
