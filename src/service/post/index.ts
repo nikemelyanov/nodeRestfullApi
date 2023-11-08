@@ -2,25 +2,25 @@ import pool from '../../db';
 
 export class PostService {
   static async createPost(
-    postTitle: string,
-    postBody: string,
-    authorId: number,
-    author: string,
-    createdDate: string,
-    avatar: string
+    post_title: string,
+    post_body: string,
+    author_id: number,
+    author_name: string,
+    created_date: string,
+    avatar_path: string
   ) {
     try {
       const result = await pool.query(
-        'INSERT INTO posts(title, body, user_id, author, date, avatar) VALUES ($1, $2, $3, $4, $5, $6)',
-        [postTitle, postBody, authorId, author, createdDate, avatar]
+        'INSERT INTO posts(post_title, post_body, author_id, author_name, created_date, avatar_path) VALUES ($1, $2, $3, $4, $5, $6)',
+        [post_title, post_body, author_id, author_name, created_date, avatar_path]
       );
     } catch (err) {
       console.error(err);
     }
   }
-  static async deletePost(postId: number) {
+  static async deletePost(post_id: number) {
     try {
-      const result = pool.query('DELETE FROM posts WHERE id = $1', [postId]);
+      const result = pool.query('DELETE FROM posts WHERE id = $1', [post_id]);
     } catch (err) {
       console.error(err);
     }
@@ -33,10 +33,10 @@ export class PostService {
       console.error(err);
     }
   }
-  static async getOnePost(postTitle: string) {
+  static async getOnePost(post_title: string) {
     try {
-      const result = await pool.query('SELECT * FROM posts WHERE title = $1', [
-        postTitle,
+      const result = await pool.query('SELECT * FROM posts WHERE post_title = $1', [
+        post_title,
       ]);
       const post = result.rows[0];
       return post;

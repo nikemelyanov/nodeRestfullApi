@@ -1,11 +1,11 @@
 import pool from '../../db';
 
 export class CommentsServise {
-  static async getComments(postId: number) {
+  static async getComments(post_id: number) {
     try {
       const result = await pool.query(
         'SELECT * FROM comments WHERE post_id = $1 ORDER BY id DESC',
-        [postId]
+        [post_id]
       );
       return result.rows;
     } catch (err) {
@@ -14,17 +14,17 @@ export class CommentsServise {
   }
 
   static async createComment(
-    commentBody: string,
-    postId: number,
-    authorId: number,
-    author: string,
-    createdDate: string,
-    avatar: string
+    comment_body: string,
+    post_id: number,
+    author_id: number,
+    author_name: string,
+    created_date: string,
+    avatar_path: string
   ) {
     try {
       const result = await pool.query(
-        'INSERT INTO comments(body, post_id, user_id, author, date, avatar) VALUES ($1, $2, $3, $4, $5, $6)',
-        [commentBody, postId, authorId, author, createdDate, avatar]
+        'INSERT INTO comments(comment_body, post_id, author_id, author_name, created_date, avatar_path) VALUES ($1, $2, $3, $4, $5, $6)',
+        [comment_body, post_id, author_id, author_name, created_date, avatar_path]
       );
     } catch (err) {
       console.error(err);
