@@ -29,7 +29,7 @@ app.use('/images', express.static('./app/images'))
 app.listen(port, () => {
   try {
     pool.connect()
-    console.log('succesful database.')
+    console.log('succesful database OK.')
   } catch (err) {
     console.error('ошибка подключения к бд.')
   }
