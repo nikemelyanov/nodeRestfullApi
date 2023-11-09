@@ -66,23 +66,4 @@ export class UserService {
       console.error(err);
     }
   }
-
-  static async createUserTable() {
-    try {
-      const res = await pool.query(
-        "CREATE TABLE users (id serial PRIMARY KEY, email VARCHAR(50), password VARCHAR(50))"
-      );
-      console.log(res);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  static async dropUserTable() {
-    try {
-      const res = await pool.query("DROP TABLE IF EXISTS users");
-    } catch (err) {
-      console.error(err);
-    }
-  }
 }
