@@ -13,7 +13,7 @@ export class AuthController{
       avatar_path: req.body.avatar_path,
     };
 
-    const searchUserForDB = await UserService.getUser(user.email);
+    const searchUserForDB = await UserService.findByEmail(user.email);
     if (searchUserForDB) {
       return res
         .json({ message: 'пользователь уже зарегистрирован' })
@@ -27,10 +27,10 @@ export class AuthController{
   static async login(req: any, res: any) {
     const user = {
       email: req.body.email,
-      password: req.body.password, // add this fix in postman
+      password: req.body.password, 
     };
 
-    const searchUser = await UserService.getUser(user.email);
+    const searchUser = await UserService.getUser(user.email, user.password);
 
     if (!searchUser) {
       return res
@@ -46,7 +46,6 @@ export class AuthController{
       last_name: searchUser.last_name,
       avatar_path: searchUser.avatar_path,
     };
-    console.log(payload);
 
     const token = jwt.sign(payload, secret);
     return res.status(200).json({ token: token });

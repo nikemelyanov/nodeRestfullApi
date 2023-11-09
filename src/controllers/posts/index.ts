@@ -28,9 +28,9 @@ export class PostController {
           post.title,
           post.body,
           decoded_user.id,
-          `${decoded_user.firstname + ' ' + decoded_user.lastname}`,
+          `${decoded_user.first_name + ' ' + decoded_user.last_name}`,
           post.date,
-          decoded_user.avatar
+          decoded_user.avatar_path
         );
       }
 

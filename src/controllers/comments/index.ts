@@ -8,6 +8,7 @@ export class CommentsController {
     };
 
     const result = await CommentsServise.getComments(postId.id);
+    console.log(result)
     return res.json(result);
   }
 
@@ -36,9 +37,9 @@ export class CommentsController {
           comment.body,
           comment.postId,
           decodedUser.id,
-          `${decodedUser.firstname + ' ' + decodedUser.lastname}`,
+          `${decodedUser.first_name + ' ' + decodedUser.last_name}`,
           comment.date,
-          decodedUser.avatar
+          decodedUser.avatar_path
         );
       }
 
