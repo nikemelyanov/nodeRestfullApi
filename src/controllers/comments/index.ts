@@ -8,7 +8,6 @@ export class CommentsController {
     };
 
     const result = await CommentsServise.getComments(postId.id);
-    console.log(result)
     return res.json(result);
   }
 
