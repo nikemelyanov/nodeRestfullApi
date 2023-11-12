@@ -31,7 +31,7 @@ export class AuthController{
     };
 
     const searchUser = await UserService.getUser(user.email, user.password);
-
+    console.log(searchUser)
     if (!searchUser) {
       return res
         .status(401)
@@ -41,7 +41,6 @@ export class AuthController{
 
     const payload = {
       id: searchUser.id,
-      email: searchUser.email,
       first_name: searchUser.first_name,
       last_name: searchUser.last_name,
       avatar_path: searchUser.avatar_path,

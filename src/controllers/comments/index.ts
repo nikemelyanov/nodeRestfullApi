@@ -12,13 +12,9 @@ export class CommentsController {
   }
 
   static async createComment(req: any, res: any) {
-    const date = new Date();
-    const formatedDate = date.toLocaleDateString();
-
     const comment = {
-      postId: req.body.postId,
-      body: req.body.commentBody,
-      date: formatedDate,
+      body: req.body.body,
+      postId: req.body.postId
     };
 
     const tokenWithPrefix = req.headers.authorization;
@@ -36,9 +32,6 @@ export class CommentsController {
           comment.body,
           comment.postId,
           decodedUser.id,
-          `${decodedUser.first_name + ' ' + decodedUser.last_name}`,
-          comment.date,
-          decodedUser.avatar_path
         );
       }
 

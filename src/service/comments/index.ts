@@ -14,17 +14,14 @@ export class CommentsServise {
   }
 
   static async createComment(
-    comment_body: string,
+    body: string,
     post_id: number,
     author_id: number,
-    author_name: string,
-    created_date: string,
-    avatar_path: string
   ) {
     try {
       const result = await pool.query(
-        'INSERT INTO comments(comment_body, post_id, author_id, author_name, created_date, avatar_path) VALUES ($1, $2, $3, $4, $5, $6)',
-        [comment_body, post_id, author_id, author_name, created_date, avatar_path]
+        'INSERT INTO comments(body, post_id, author_id) VALUES ($1, $2, $3)',
+        [body, post_id, author_id]
       );
     } catch (err) {
       console.error(err);

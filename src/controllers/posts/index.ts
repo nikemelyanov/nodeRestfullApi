@@ -4,13 +4,9 @@ import { PostService } from '../../service/post';
 
 export class PostController {
   static async addPost(req: any, res: any) {
-    const date = new Date();
-    const formated_date = date.toLocaleDateString();
-
     const post = {
       title: req.body.title,
       body: req.body.body,
-      date: formated_date,
     };
 
     const tokenWithPrefix = req.headers.authorization;
@@ -28,9 +24,6 @@ export class PostController {
           post.title,
           post.body,
           decoded_user.id,
-          `${decoded_user.first_name + ' ' + decoded_user.last_name}`,
-          post.date,
-          decoded_user.avatar_path
         );
       }
 
