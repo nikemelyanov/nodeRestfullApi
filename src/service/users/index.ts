@@ -42,13 +42,17 @@ export class UserService {
       ]);
       const user = res.rows[0];
 
-      const checkPassword = await PassService.checkPassword(
-        user_password,
-        user.password_hash
-      );
+      if (user) {
+        const checkPassword = await PassService.checkPassword(
+          user_password,
+          user.password_hash
+        );
 
-      if (checkPassword) {
-        return user;
+        if (checkPassword) {
+          return user;
+        }
+      } else {
+        return null;
       }
     } catch (err) {
       console.error(err);
