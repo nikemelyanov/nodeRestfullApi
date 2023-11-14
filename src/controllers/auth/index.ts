@@ -45,7 +45,7 @@ export class AuthController {
       last_name: searchUser.last_name,
       avatar_path: searchUser.avatar_path,
     };
-    console.log(payload)
+    
     const token = jwt.sign(payload, secret);
     return res.status(200).json({ token: token });
   }
