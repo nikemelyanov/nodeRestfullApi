@@ -1,4 +1,4 @@
-import pool from "../../db";
+import pool from "../../../db";
 
 export class PostService {
   static async createPost(title: string, body: string, author_id: number) {

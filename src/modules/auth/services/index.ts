@@ -1,4 +1,4 @@
-import pool from "../../db";
+import pool from "../../../db";
 import { PassService } from "./pass_service";
 
 export class UserService {

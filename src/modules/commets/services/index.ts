@@ -1,4 +1,4 @@
-import pool from "../../db";
+import pool from "../../../db";
 
 export class CommentsServise {
   static async getComments(post_id: number) {
