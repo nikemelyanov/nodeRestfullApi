@@ -1,7 +1,7 @@
 import express from 'express';
-const router = express.Router();
-
 import { LikesController } from '../../modules/likes/controllers';
+
+const router = express.Router();
 
 router.post('/addLike', LikesController.add);
 
