@@ -1,4 +1,4 @@
-import { UserService } from "../services";
+import { UserService } from "../../users/services";
 import jwt from "jsonwebtoken";
 
 const secret = "my sercret jwt";

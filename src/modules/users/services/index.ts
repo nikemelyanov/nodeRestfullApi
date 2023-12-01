@@ -1,5 +1,5 @@
 import pool from "../../../db";
-import { PassService } from "./pass_service";
+import { PassService } from "../../auth/services/pass_service";
 
 export class UserService {
   static async createUser(user: any) {
@@ -66,6 +66,14 @@ export class UserService {
       ]);
       const user = res.rows[0];
       return user;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  static async updateAvatar(newAvatarPath: string, user_id: number) {
+    try {
+      const res = pool.query('UPDATE users SET avatar_path = $1 WHERE id = $2', [newAvatarPath, user_id])
     } catch (err) {
       console.error(err);
     }

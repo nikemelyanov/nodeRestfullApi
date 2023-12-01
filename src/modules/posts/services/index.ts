@@ -4,7 +4,7 @@ export class PostService {
   static async createPost(title: string, body: string, author_id: number) {
     try {
       const result = await pool.query(
-        "INSERT INTO posts(title, body, user_id) VALUES ($1, $2, $3)",
+        "INSERT INTO posts(title, body, author_id) VALUES ($1, $2, $3)",
         [title, body, author_id]
       );
     } catch (err) {
@@ -21,7 +21,7 @@ export class PostService {
   static async getAllPosts() {
     try {
       const result = await pool.query(
-        "SELECT posts.*, users.first_name, users.last_name, users.avatar_path FROM posts JOIN users ON users.id = posts.user_id ORDER BY id DESC"
+        "SELECT posts.*, COUNT(post_likes.id) AS like_count, users.first_name, users.last_name, users.avatar_path FROM posts LEFT JOIN post_likes ON posts.id = post_likes.post_liked_id JOIN users ON posts.author_id = users.id GROUP BY posts.id, users.id ORDER BY like_count DESC"
       );
       return result.rows;
     } catch (err) {
