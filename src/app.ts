@@ -1,16 +1,11 @@
 import express, { json } from "express";
 import indexRouter from "./routes";
-import authRouter from "./routes/users/auth";
-import postRouter from "./routes/posts";
-import commentsRouter from "./routes/comments";
-import likesRouter from "./routes/likes";
-import usersRouter from "./routes/users/update";
 import cors from "cors";
 import dotenv from "dotenv";
 import pool from "./db";
 
 const app = express();
-const port = process.env.port || 4000;
+const port = process.env.port || 7777;
 
 dotenv.config();
 
@@ -21,20 +16,14 @@ app.use(
   })
 );
 
-app.use("/", indexRouter);
-app.use("/auth", authRouter);
-app.use("/posts", postRouter);
-app.use("/comments", commentsRouter);
-app.use("/likes", likesRouter);
-app.use("/users", usersRouter);
+app.use("/api", indexRouter);
 
 app.use("/images", express.static("./app/images"));
 
-app.listen(port, () => {
+app.listen(port, async () => {
   try {
-    pool.connect();
+    await pool.connect();
     console.log("succesful database OK.");
-    console.log(authRouter)
   } catch (err) {
     console.error("ошибка подключения к бд.");
   }
