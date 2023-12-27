@@ -8,6 +8,10 @@ import usersRouter from "../routes/users/update";
 
 const router = express.Router();
 
+router.use("/", (req, res) => {
+    res.send('hello, im Retwitzzz!')
+})
+
 router.use("/auth", authRouter);
 router.use("/posts", postRouter);
 router.use("/comments", commentsRouter);

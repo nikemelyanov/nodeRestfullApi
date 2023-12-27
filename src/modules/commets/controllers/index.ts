@@ -21,7 +21,7 @@ export class CommentsController {
     const token = tokenWithPrefix.split(' ')[1];
 
     if (!token) {
-      return res.status(401).json({ message: 'токен отсутствует' });
+      return res.status(400).json({ message: 'токен отсутствует' });
     }
 
     try {
@@ -37,7 +37,7 @@ export class CommentsController {
 
       return res.status(201).json({ message: 'комментарий создан успешно' });
     } catch (err) {
-      return res.status(401).json({ message: 'неверный токен' });
+      return res.status(400).json({ message: 'неверный токен' });
     }
   }
 }

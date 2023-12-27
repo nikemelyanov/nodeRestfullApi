@@ -13,7 +13,7 @@ export class PostController {
     const token = tokenWithPrefix.split(' ')[1];
 
     if (!token) {
-      return res.status(401).json({ message: 'токен отсутствует' });
+      return res.status(400).json({ message: 'токен отсутствует' });
     }
 
     try {
@@ -27,9 +27,9 @@ export class PostController {
         );
       }
 
-      return res.status(200).json({ message: 'пост создан успешно' });
+      return res.status(201).json({ message: 'пост создан успешно' });
     } catch (err) {
-      return res.status(401).json({ message: 'неверный токен' });
+      return res.status(400).json({ message: 'неверный токен' });
     }
   }
 

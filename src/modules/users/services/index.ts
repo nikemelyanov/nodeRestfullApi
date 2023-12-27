@@ -5,16 +5,20 @@ export class UserService {
   static async createUser(user: any) {
     const hash_password = await PassService.generateHash(user.password);
 
-    const res = await pool.query(
-      "INSERT INTO users (email, password_hash, avatar_path, first_name, last_name) VALUES ($1, $2, $3, $4, $5)",
-      [
-        user.email,
-        hash_password,
-        user.avatar_path,
-        user.first_name,
-        user.last_name,
-      ]
-    );
+    try {
+      const res = await pool.query(
+        "INSERT INTO users (email, password_hash, avatar_path, first_name, last_name) VALUES ($1, $2, $3, $4, $5)",
+        [
+          user.email,
+          hash_password,
+          user.avatar_path,
+          user.first_name,
+          user.last_name,
+        ]
+      );
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   static async deleteUser(user_id: number) {
@@ -73,7 +77,10 @@ export class UserService {
 
   static async updateAvatar(newAvatarPath: string, user_id: number) {
     try {
-      const res = pool.query('UPDATE users SET avatar_path = $1 WHERE id = $2', [newAvatarPath, user_id])
+      const res = pool.query(
+        "UPDATE users SET avatar_path = $1 WHERE id = $2",
+        [newAvatarPath, user_id]
+      );
     } catch (err) {
       console.error(err);
     }

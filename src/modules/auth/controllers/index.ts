@@ -21,7 +21,7 @@ export class AuthController {
     }
 
     const registerUser = await UserService.createUser(user);
-    return res.json({ message: "регистрация прошла успешно" }).status(200);
+    return res.json({ message: "регистрация прошла успешно" }).status(201);
   }
 
   static async login(req: any, res: any) {
@@ -34,9 +34,8 @@ export class AuthController {
 
     if (!searchUser) {
       return res
-        .status(401)
+        .status(400)
         .json({ message: "неправильный логин или пароль" })
-        .status(200);
     }
 
     const payload = {
