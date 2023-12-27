@@ -1,5 +1,6 @@
 import express, { json } from "express";
 import indexRouter from "./routes";
+import apiRouter from "./routes/api";
 import cors from "cors";
 import dotenv from "dotenv";
 import pool from "./db";
@@ -15,7 +16,8 @@ app.use(
     origin: ["https://retwitzzz.vercel.app", "http://localhost:3000"],
   })
 );
-app.use("/api", indexRouter);
+app.use("/", indexRouter);
+app.use("/api", apiRouter);
 app.use("/images", express.static("./app/images"));
 
 app.listen(port, async () => {
