@@ -16,8 +16,8 @@ export class AuthController {
     const searchUserForDB = await UserService.findByEmail(user.email);
     if (searchUserForDB) {
       return res
+        .status(400)
         .json({ message: "пользователь уже зарегистрирован" })
-        .status(400);
     }
 
     const registerUser = await UserService.createUser(user);

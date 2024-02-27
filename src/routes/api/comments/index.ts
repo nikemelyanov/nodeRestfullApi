@@ -3,7 +3,7 @@ import { CommentsController } from '../../../modules/commets/controllers';
 
 const router = express.Router();
 
-router.post('/getComments', CommentsController.getComments)
-router.post('/createComment', CommentsController.createComment)
+router.get('/comments', CommentsController.getComments)
+router.post('/comments', CommentsController.createComment)
 
 export default router;

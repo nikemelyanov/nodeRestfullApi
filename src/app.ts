@@ -2,13 +2,10 @@ import express, { json } from "express";
 import indexRouter from "./routes";
 import apiRouter from "./routes/api";
 import cors from "cors";
-import dotenv from "dotenv";
 import pool from "./db";
 
 const app = express();
 const port = process.env.PORT || 7777; // no work .env
-
-dotenv.config();
 
 app.use(json());
 app.use(

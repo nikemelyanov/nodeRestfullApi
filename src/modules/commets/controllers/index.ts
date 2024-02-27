@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 export class CommentsController {
   static async getComments(req: any, res: any) {
     const postId = {
-      id: req.body.postId,
+      id: req.query.postId,
     };
 
     const result = await CommentsServise.getComments(postId.id);
