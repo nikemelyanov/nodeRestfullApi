@@ -1,10 +1,11 @@
+import { Request, Response } from "express";
 import { UserService } from "../../users/services";
 import jwt from "jsonwebtoken";
 
 const secret = "my sercret jwt";
 
 export class AuthController {
-  static async register(req: any, res: any) {
+  static async register(req: Request, res: Response) {
     const user = {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -24,7 +25,7 @@ export class AuthController {
     return res.json({ message: "регистрация прошла успешно" }).status(201);
   }
 
-  static async login(req: any, res: any) {
+  static async login(req: Request, res: Response) {
     const user = {
       email: req.body.email,
       password: req.body.password,

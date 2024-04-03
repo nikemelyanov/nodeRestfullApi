@@ -1,7 +1,8 @@
+import { Request, Response } from "express";
 import { UserService } from "../services";
 
 export class UserController {
-  static async updateAvatar(req: any, res: any) {
+  static async updateAvatar(req: Request, res: Response) {
     const newData = {
       avatar: req.body.newAvatarPath,
       userId: req.body.userId,

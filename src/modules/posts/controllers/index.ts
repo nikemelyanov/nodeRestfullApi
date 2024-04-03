@@ -1,15 +1,19 @@
+import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
 import { PostService } from '../services';
 
 export class PostController {
-  static async addPost(req: any, res: any) {
+  static async addPost(req: Request, res: Response) {
     const post = {
       title: req.body.title,
       body: req.body.body,
     };
 
     const tokenWithPrefix = req.headers.authorization;
+    if (!tokenWithPrefix) {
+      return res.status(400).json({ message: 'токен отсутствует' });
+    }
     const token = tokenWithPrefix.split(' ')[1];
 
     if (!token) {
@@ -33,12 +37,12 @@ export class PostController {
     }
   }
 
-  static async getPosts(req: any, res: any) {
+  static async getPosts(req: Request, res: Response) {
     const result = await PostService.getAllPosts();
     return res.json(result);
   }
 
-  static async getPost(req: any, res: any) {
+  static async getPost(req: Request, res: Response) {
     const post = {
       title: req.body.title,
     };
