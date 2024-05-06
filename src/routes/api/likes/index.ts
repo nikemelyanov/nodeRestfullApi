@@ -3,6 +3,6 @@ import { LikesController } from '../../../modules/likes/controllers';
 
 const router = express.Router();
 
-router.post('/addLike', LikesController.add);
+router.post('/', LikesController.add);
 
 export default router;
