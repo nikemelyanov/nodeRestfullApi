@@ -15,7 +15,7 @@ export class CommentsController {
   static async createComment(req: Request, res: Response) {
     const comment = {
       body: req.body.body,
-      postId: req.body.postId
+      postId: req.body.postId,
     };
 
     const tokenWithPrefix = req.headers.authorization;

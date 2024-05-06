@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { LikesService } from "../services";
+import { Request, Response } from 'express';
+import { LikesService } from '../services';
 
 export class LikesController {
   static async add(req: Request, res: Response) {

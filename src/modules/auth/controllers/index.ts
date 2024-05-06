@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
-import { UserService } from "../../users/services";
-import jwt from "jsonwebtoken";
+import { Request, Response } from 'express';
+import { UserService } from '../../users/services';
+import jwt from 'jsonwebtoken';
 
-const secret = "my sercret jwt";
+const secret = 'my sercret jwt';
 
 export class AuthController {
   static async register(req: Request, res: Response) {
@@ -18,11 +18,11 @@ export class AuthController {
     if (searchUserForDB) {
       return res
         .status(400)
-        .json({ message: "пользователь уже зарегистрирован" })
+        .json({ message: 'пользователь уже зарегистрирован' });
     }
 
     const registerUser = await UserService.createUser(user);
-    return res.json({ message: "регистрация прошла успешно" }).status(201);
+    return res.json({ message: 'регистрация прошла успешно' }).status(201);
   }
 
   static async login(req: Request, res: Response) {
@@ -34,9 +34,7 @@ export class AuthController {
     const searchUser = await UserService.getUser(user.email, user.password);
 
     if (!searchUser) {
-      return res
-        .status(400)
-        .json({ message: "неправильный логин или пароль" })
+      return res.status(400).json({ message: 'неправильный логин или пароль' });
     }
 
     const payload = {
@@ -45,7 +43,7 @@ export class AuthController {
       last_name: searchUser.last_name,
       avatar_path: searchUser.avatar_path,
     };
-    
+
     const token = jwt.sign(payload, secret);
     return res.status(200).json({ token: token });
   }
